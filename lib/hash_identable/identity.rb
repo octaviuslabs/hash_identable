@@ -7,7 +7,7 @@ module HashIdentable
     attr_reader :klass, :id
 
     def initialize klass, id
-      @klass = klass
+      @klass = klass.to_s
       @id = id
     end
 

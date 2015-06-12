@@ -9,8 +9,8 @@ module HashIdentable
   class LookupTable < Hash
 
     def fetch_id klass, &blk
-      klass = klass.to_s
       begin
+        klass = serialzie(klass)
         return invert(klass)
       rescue
         return blk.call if block_given?
@@ -20,7 +20,7 @@ module HashIdentable
 
     def fetch key, &blk
       begin
-        return self[key].camelize
+        return de_serialize(self[key])
       rescue
         return blk.call if block_given?
         return nil
@@ -28,7 +28,7 @@ module HashIdentable
     end
 
     def store key, klass
-      klass = klass.to_s.underscore
+      klass = serialzie(klass)
       if has_key?(key)
         raise "Id's for objects must be unique"
       end
@@ -36,6 +36,15 @@ module HashIdentable
         raise "Object is already registered"
       end
       super(key, klass)
+    end
+
+  private
+    def serialzie klass
+      klass.to_s.underscore
+    end
+
+    def de_serialize klass
+      klass.to_s.camelize
     end
 
   end
