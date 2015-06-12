@@ -12,7 +12,7 @@ module HashIdentable
   end
 
   def uuid
-    identity.encoded
+    identity.encoded_id
   end
 
 end

@@ -2,6 +2,19 @@ require 'spec_helper'
 require 'hash_identable'
 
 module HashIdentable
+  module TestStub
+    Identity = Struct.new(:id) do
+      def encoded_id
+        "k54p36QKgnM7LbXGkLhr10EJ1WweRNr9ODx2"
+      end
+    end
+
+    def identity
+      Identity.new(1)
+    end
+
+  end
+
   describe HashIdentable do
     subject(:obj)do
       obj = instance_double("ActiveRecordObject")
@@ -17,7 +30,15 @@ module HashIdentable
       it { is_expected.to be_a Identity }
       it { expect(subject.id).to eql 500 }
     end
-    it "should pull data from the task log uuid and convert it to uuids"
+
+    describe "#uuid" do
+      subject do
+        obj.extend(TestStub)
+        obj.uuid
+      end
+      it { is_expected.to be_a String }
+      it { is_expected.to eql "k54p36QKgnM7LbXGkLhr10EJ1WweRNr9ODx2" }
+    end
 
   end
 end

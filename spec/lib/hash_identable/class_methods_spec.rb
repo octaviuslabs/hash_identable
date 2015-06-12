@@ -13,7 +13,7 @@ module HashIdentable
   describe HashIdentable do
     subject(:klass) { TestData::TestObject }
     it { is_expected.to respond_to :has_hashid}
-    it "should respond to locate_by_hash_id"
+    it "should allow you to find based on hashid"
 
     describe "#has_hashid" do
       subject do
