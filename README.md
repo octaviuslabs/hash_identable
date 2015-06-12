@@ -12,13 +12,38 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install hash_identable
-
 ## Usage
+Configure the gem with your salt
 
-TODO: Write usage instructions here
+```
+  HashIdentable.config do |c|
+    c.add_salt "My Salt"
+    c.set_length 36
+  end
+```
+
+In your models:
+```
+  class MyModel
+    include HashIdentable
+    has_hashid 12
+
+    # Other code
+  end
+
+```
+
+When you want the hashid:
+```
+  obj = MyModel.new(id: 12)
+  obj.uuid
+```
+Or:
+
+```
+  obj = MyModel.new(id: 12)
+  obj.identity.to_s
+```
 
 ## Contributing
 
