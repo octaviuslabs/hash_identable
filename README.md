@@ -13,24 +13,22 @@ And then execute:
     $ bundle
 
 ## Usage
-Configure the gem with your salt
+
+Assuming your model
+```
+  class MyModel
+    # Other code
+  end
+
+```
+Configure the gem
 
 ```
   HashIdentable.config do |c|
     c.set_salt "My Salt"  #THIS VALUE SHOULD NEVER CHANGE FOR THE APPLICATION
     c.set_length 36
+    c.add_object MyModel, 3
   end
-```
-
-In your models:
-```
-  class MyModel
-    include HashIdentable
-    has_hashid 12
-
-    # Other code
-  end
-
 ```
 
 When you want the hashid:
