@@ -11,7 +11,7 @@ module HashIdentable
     def fetch_id klass, &blk
       begin
         klass = serialzie(klass)
-        return invert(klass)
+        return invert[klass]
       rescue
         return blk.call if block_given?
         return nil
