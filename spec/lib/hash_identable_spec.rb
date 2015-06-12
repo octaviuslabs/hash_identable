@@ -17,6 +17,7 @@ module HashIdentable
       it { is_expected.to be_a Identity }
       it { expect(subject.id).to eql 500 }
     end
+    it "should pull data from the task log uuid and convert it to uuids"
 
   end
 end

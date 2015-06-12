@@ -1,4 +1,4 @@
-require "rubygems"
+require "active_support/inflector"
 
 module HashIdentable
 
@@ -9,16 +9,26 @@ module HashIdentable
   class LookupTable < Hash
 
     def fetch_id klass, &blk
-      yield blk unless has_value?(klass)
-      return invert(klass)
+      klass = klass.to_s
+      begin
+        return invert(klass)
+      rescue
+        return blk.call if block_given?
+        return nil
+      end
     end
 
     def fetch key, &blk
-      yield blk unless has_key?(key)
-      return Object.const_get(self[key])
+      begin
+        return self[key].camelize
+      rescue
+        return blk.call if block_given?
+        return nil
+      end
     end
 
     def store key, klass
+      klass = klass.to_s.underscore
       if has_key?(key)
         raise "Id's for objects must be unique"
       end

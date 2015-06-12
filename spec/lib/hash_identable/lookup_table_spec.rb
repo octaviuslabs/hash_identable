@@ -6,17 +6,17 @@ module HashIdentable
     subject(:table){ LookupTable.new }
 
     describe "adds object" do
-      subject(:add_step){table.store(3, :first_test)}
+      subject(:store){table.store(3, :first_test)}
 
       context "unique" do
         it { is_expected.to be_truthy }
-        it { is_expected.to eql :first_test}
+        it { is_expected.to eql "first_test"}
       end
 
       context "existing key" do
         subject do
           table.store(3, :new_test)
-          add_step
+          store
         end
         it { expect{subject}.to raise_error "Id's for objects must be unique" }
       end
@@ -24,7 +24,7 @@ module HashIdentable
       context "existing object" do
         subject do
           table.store(8, :first_test)
-          add_step
+          store
         end
         it { expect{subject}.to raise_error "Object is already registered" }
       end

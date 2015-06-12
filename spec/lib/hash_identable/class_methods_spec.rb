@@ -20,7 +20,7 @@ module HashIdentable
         klass.has_hashid(3)
       end
       it { expect{subject}.to change{HashIdentable::lookup_table.keys.count}.from(0).to(1) }
-      it { expect(subject).to eql "HashIdentable::TestData::TestObject" }
+      it { expect(subject).to eql "hash_identable/test_data/test_object" }
     end
 
   end

@@ -1,5 +1,5 @@
-require "hashids"
 require "hash_identable/exceptions"
+require "hash_identable/hsh_function"
 
 module HashIdentable
 
@@ -12,7 +12,7 @@ module HashIdentable
     end
 
     def to_s
-      hash_id.to_s
+      encoded_id.to_s
     end
 
     def hash_table_id
@@ -24,15 +24,32 @@ module HashIdentable
       return [hash_table_id, id]
     end
 
-    def hash_id
-      hashids = Hashids.new(salt, 36)
-      hashids.encode(hash_key)
+    def encoded_id
+      id_wrapper.encode(hash_key)
     end
-    alias_method :encoded, :hash_id
+
+    def to_h
+      {
+        klass: klass,
+        id: id,
+        encoded_id: encoded_id
+      }
+    end
+
+    def klass_constant
+      klass.constantize
+    end
+
+    def self.find(encoded_id)
+      decoded = HshFunction.decode(encoded_id)
+      klass = HashIdentable.lookup_table.fetch(decoded[0]){ raise NoObjectRegistered, "No object registered" }
+      new klass, decoded[1]
+    end
 
   private
-    def salt
-      @salt ||= HashIdentable.configuration.salt
+
+    def id_wrapper
+      HshFunction
     end
 
   end
