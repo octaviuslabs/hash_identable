@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'hash_identable'
+    gem 'hash_identable', :git => 'https://github.com/octaviuslabs/hash_identable.git'
 
 And then execute:
 
