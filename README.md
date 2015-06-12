@@ -17,7 +17,7 @@ Configure the gem with your salt
 
 ```
   HashIdentable.config do |c|
-    c.add_salt "My Salt"
+    c.set_salt "My Salt"  #THIS VALUE SHOULD NEVER CHANGE FOR THE APPLICATION
     c.set_length 36
   end
 ```
