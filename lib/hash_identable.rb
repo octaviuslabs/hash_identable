@@ -4,6 +4,7 @@ require "hash_identable/configuration"
 require "hash_identable/lookup_table"
 require "hash_identable/exceptions"
 require "hash_identable/identity"
+require "hash_identable/locator"
 
 module HashIdentable
 
