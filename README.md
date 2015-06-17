@@ -17,6 +17,7 @@ And then execute:
 Assuming your model
 ```
   class MyModel
+    attr_reader :id #HashIdentable depends on the presence of an ID that you are masking on the moel
     # Other code
   end
 
