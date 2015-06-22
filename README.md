@@ -1,6 +1,10 @@
 # HashIdentable
 
-TODO: Write a gem description
+Why expose your public ID's if you don't need to? Hang hash_identable on your rails models and use the #uuid method to get a unique id of any item.
+
+## Credits
+
+This gem wraps the hashids.org ruby gem: http://hashids.org/ruby/
 
 ## Installation
 
@@ -17,7 +21,7 @@ And then execute:
 Assuming your model
 ```
   class MyModel
-    attr_reader :id #HashIdentable depends on the presence of an ID that you are masking on the moel
+    attr_reader :id #HashIdentable depends on the presence of an ID
     # Other code
   end
 
