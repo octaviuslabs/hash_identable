@@ -48,6 +48,12 @@ Or:
   obj.identity.to_s
 ```
 
+When you want to find an object based on the hashid:
+```
+  obj = HashIdentable::Locator.find([<find_method>], id) # Non ActiveRecord
+  obj = HashIdentable::Locator::ActiveRecord.find(id) #ActiveRecord
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/hash_identable/fork )
